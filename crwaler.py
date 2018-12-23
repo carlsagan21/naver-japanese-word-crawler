@@ -26,8 +26,11 @@ def get_word(url):
         kanji_name = kanji_entry.text
         kanji_name = kanji_name[1:-1]
         kanji_names = kanji_name.split("·")
+        kanji_names = [kanji_name for kanji_name
+                       in kanji_names
+                       if not re.search('[a-zA-Z]', kanji_name)]
 
-    word = ",".join([entry_name] + kanji_names)
+    word = ",".join(kanji_names + [entry_name])
 
     # entry_name = _unparan_entry_name(entry_name)
 
